@@ -1,27 +1,43 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+   
+
   </div>
-  <router-view/>
+  <router-view  @addPost="add" />
 </template>
+<script>
+
+export default {
+    
+ 
+}
+</script>
+
 
 <style>
+body{
+  background: rgb(243, 240, 240);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  max-width: 660px;
+  margin: 10px auto;
+  color: #555;
+  
 }
 
 #nav {
   padding: 30px;
+  text-align: center;
+  
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+
+
 }
 
 #nav a.router-link-exact-active {
