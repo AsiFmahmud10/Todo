@@ -35,8 +35,8 @@
                                       
                                            </transition-group> 
                         </div>
-                              <div v-else class="emptyTodo">
-                                                THE TODO IS EMPTY
+                              <div v-else class="emptyTodo" style="color:orange">
+                                               <h4>THE TODO IS EMPTY</h4> 
                             </div>
                 </transition>
                
@@ -86,7 +86,7 @@ export default {
   
    const beforeEnter = (el)=>{
      console.log("before-enter")
-            el.style.transform = "translateY(-60px)";
+            el.style.transform = "translateY(-100px)";
              el.style.opacity = '0';
    }
  const enter = (el, done)=>{
@@ -122,6 +122,7 @@ export default {
   position: relative;
 }
 .title{
+  margin-top:50px ;
   font-family: cursive;
   font-weight: bold;
   text-transform: uppercase;
@@ -217,7 +218,7 @@ a {
 }
 
  .inputWraper{
-   margin-top:100px ;
+   margin-top:46px ;
  }
 .input {
   outline: none;
