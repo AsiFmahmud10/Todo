@@ -1,35 +1,49 @@
 <template>
   <div class="container">
+    <transition name="title" class="title" appear
+          @before-enter ="beforeEnter"
+          @enter ="enter"
+          @after-enter ="afterEnter"
+    >
+          <h3  style="text-align : center ">Be positive</h3>
+   </transition>
+
+
     <transition name="toast">
       <Toast v-if="show" />
     </transition>
 
-    <div class="inputWraper">
-      <input
-        class="input"
-        type="text"
-        placeholder="Enter to add task "
-        @keypress.enter="addTask"
-        v-model="input"
-      />
-    </div>
-              <div v-if="posts.length">
-                          <transition-group name="list" tag="ul" appear>
-                                <div style="width:100%" v-for="post in posts" :key="post">
-                                      <Card :post="post" @deletePost="handleDelete" />
-                                </div>
-                              
-                          </transition-group> 
-             </div>
-    <div v-else class="emptyTodo">
-                     THE TODO IS EMPTY
+         
+            <div class="inputWraper">
+              <input
+                class="input"
+                type="text"
+                placeholder="Enter to add task "
+                @keypress.enter="addTask"
+                v-model="input"
+              />
+            </div>
+
+              <transition name="switch" mode="out-in" >  
+                  <div v-if="posts.length">
+                                       <transition-group name="list" tag="ul" appear>
+                    
+                       
+                                         <div style="width:100%" v-for="post in posts" :key="post">
+                                              <Card :post="post" @deletePost="handleDelete" />
+                                        </div>
+                                      
+                                           </transition-group> 
+                        </div>
+                              <div v-else class="emptyTodo">
+                                                THE TODO IS EMPTY
+                            </div>
+                </transition>
+               
+
+
           </div>
-
-        <h3  style="text-align : center ">Be positive</h3>
-
-
-  
-  </div>
+          
 </template>
 
 <script>
@@ -37,12 +51,14 @@
 import Card from "@/components/card.vue";
 import Toast from "@/components/toast.vue";
 import { ref, provide } from "vue";
+import gsap from 'gsap'
 
 export default {
   name: "Home",
   components: { Card, Toast },
 
-  setup(props, { emit }) {
+  setup(props, { emit }) 
+  {
     const posts = ref(["game","now"]);
     const input = ref("");
 
@@ -67,7 +83,28 @@ export default {
         }, 1000);
       }
     };
-    return { posts, handleDelete, input, addTask, show };
+  
+   const beforeEnter = (el)=>{
+     console.log("before-enter")
+            el.style.transform = "translateY(-60px)";
+             el.style.opacity = '0';
+   }
+ const enter = (el, done)=>{
+             console.log("i am in",el)
+            gsap.to(el,{
+                   y:  0,
+                   duration: 2,
+                   ease: 'bounce.out',
+                   opacity:1,
+                   onComplete: done,
+                
+            })
+            
+   }
+    const afterEnter = (el)=>{
+          el.style.color ='orangered'
+   }
+    return { posts, handleDelete, input, addTask, show,beforeEnter,enter,afterEnter };
   },
 
   mounted() {},
@@ -79,6 +116,26 @@ export default {
      box-sizing: border-box;
      padding: 0;
  
+}
+/* title */
+.container{
+  position: relative;
+}
+.title{
+  font-family: cursive;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: inherit;
+  
+}
+
+/* switch*/
+.switch-enter-from, .switch-leave-to{
+   opacity: 0;
+   transform: translateY(10px);
+}
+.switch-enter-active, .switch-leave-active{
+  transition: all .5s ease;
 }
 .emptyTodo{
   text-align: center;
