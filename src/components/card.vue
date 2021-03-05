@@ -2,13 +2,11 @@
   <div class="main">
     <div class="action">
       <div class="h" @click="show">{{ post}}</div>
-      <div>
+      <div class="flex">
         <span class="material-icons effect" @click="deletePost">
           delete
         </span>
-        <span class="material-icons effect">
-          done
-        </span>
+       
       </div>
     </div>
     <div v-if="on" style="display:flex-root">
@@ -45,6 +43,7 @@ export default {
 .h {
   cursor: pointer;
   padding: 12px;
+  margin-left: 13px;
 }
 .effect {
   cursor: pointer;
@@ -56,8 +55,11 @@ export default {
 }
 .action {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+}
+.flex{
+      margin-right: 23px;
 }
 </style>
 

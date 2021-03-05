@@ -74,7 +74,8 @@ export default {
     const addTask = () => {
     
       if (input.value.length > 0) {
-        posts.value.push(input.value);
+        posts.value = [input.value,...posts.value]
+
         input.value = "";
       } else {
         show.value = true;
@@ -153,17 +154,19 @@ export default {
 
 /* list Animation */
 .list-enter-from{
+  opacity: 0;
    transform: scale(.6);
 }
 .list-move{
   transition: all .3s ease;
 }
 .list-enter-to{
+   opacity: 1;
    transform: scale(1);
   
 }
 .list-enter-active{
-    transition: all .4s ease;
+    transition: all .7s ease;
 }
 .list-leave-active{
     transition: all .2s ease;
@@ -172,7 +175,7 @@ export default {
 }
 .list-leave-to{
 transform: scale(.6);  
-    
+  opacity: 0;
 }
 
 
