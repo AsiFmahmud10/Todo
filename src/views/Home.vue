@@ -59,7 +59,7 @@ export default {
 
   setup(props, { emit }) 
   {
-    const posts = ref(["game","now"]);
+    const posts = ref([]);
     const input = ref("");
 
     const handleDelete = (post) => {
